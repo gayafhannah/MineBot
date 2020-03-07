@@ -89,32 +89,33 @@ public class Clientbound {
         data.read(Yaw,0,4);
         data.read(Pitch,0,4);
         data.read(Flags,0,1);
-        if (((0x1>>0)&1)==1) {
+        if (((Flags[0]>>0)&1)==1) {
             client.Player_X+=ByteBuffer.wrap(X).getDouble();
         } else {
             client.Player_X=ByteBuffer.wrap(X).getDouble();
         }
-        if (((0x1>>1)&1)==1) {
+        if (((Flags[0]>>1)&1)==1) {
             client.Player_Y+=ByteBuffer.wrap(Y).getDouble();
         } else {
             client.Player_Y=ByteBuffer.wrap(Y).getDouble();
         }
-        if (((0x1>>2)&1)==1) {
+        if (((Flags[0]>>2)&1)==1) {
             client.Player_Z+=ByteBuffer.wrap(Z).getDouble();
         } else {
             client.Player_Z=ByteBuffer.wrap(Z).getDouble();
         }
-        if (((0x1>>3)&1)==1) {
+        if (((Flags[0]>>3)&1)==1) {
             client.Player_Yaw+=ByteBuffer.wrap(Yaw).getFloat();
         } else {
             client.Player_Yaw=ByteBuffer.wrap(Yaw).getFloat();
         }
-        if (((0x1>>4)&1)==1) {
+        if (((Flags[0]>>4)&1)==1) {
             client.Player_Pitch+=ByteBuffer.wrap(Pitch).getFloat();
         } else {
             client.Player_Pitch=ByteBuffer.wrap(Pitch).getFloat();
         }
         TeleportID = Utilities.readVarInt(data);
+        Serverbound.teleportConfirm(client,TeleportID);
         System.out.println("Player Position:");
         System.out.printf("X:%f Y:%f Z:%f Yaw:%f Pitch:%f\n",client.Player_X,client.Player_Y,client.Player_Z,client.Player_Yaw,client.Player_Pitch);
     }

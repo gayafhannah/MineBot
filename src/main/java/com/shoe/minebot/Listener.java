@@ -82,7 +82,9 @@ public class Listener{
                     return;
                 case 0x1C: //Entity status
                     break;
-                case 0x1d: //Explosion
+                case 0x1D: //Explosion
+                    break;
+                case 0x1E: //Unload chunk
                     break;
                 case 0x1F: //Change Game State
                     break;

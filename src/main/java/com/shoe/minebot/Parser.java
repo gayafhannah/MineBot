@@ -15,6 +15,9 @@ public class Parser {
                 Serverbound.chatMessage(client,"Disconnecting from server. bye");
                 System.out.println("Disconnected by user");
                 throw new RuntimeException("Disconnect by user");
+            case "move": //move bot
+                client.queue.add("f");
+                break;
             default: //Unknown command
                 Serverbound.chatMessage(client, String.format("Unknown command: %s", cmd[0]));
         }

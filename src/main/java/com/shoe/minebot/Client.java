@@ -25,6 +25,7 @@ public class Client {
     public float Player_Health=-1;
     //public static int Player_Hunger; unused sofar
     public Queue queue = new LinkedList();
+    public Actor actor = new Actor(this);
 
     public void Connect(String _ipAddr) throws IOException {
         Connect(_ipAddr, username);
@@ -39,6 +40,7 @@ public class Client {
         System.out.println("Starting Handshake");
         Serverbound.handshake(this);
         Serverbound.login_start(this);
+        actor.start();
     }
     public void SendPacket(byte[] data) throws IOException {
         //Do the len of data, send varInt of length packed with data

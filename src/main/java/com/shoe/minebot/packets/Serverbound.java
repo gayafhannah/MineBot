@@ -75,6 +75,11 @@ public class Serverbound {
     public static void playerPosition(Client client,double X,double Y,double Z,boolean onGround) throws IOException { //0x11
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Utilities.writeVarInt(0x011,outputStream);
-
+        outputStream.writeBytes(Utilities.doubleToByteArray(X));
+        outputStream.writeBytes(Utilities.doubleToByteArray(Y));
+        outputStream.writeBytes(Utilities.doubleToByteArray(Z));
+        if (onGround==true) { outputStream.write(0x01); } else { outputStream.write(0x00); } //onGround Byte
+        client.SendPacket(outputStream.toByteArray());
+        System.out.println("Sent position packet");
     }
 }
