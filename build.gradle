@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+//group 'org.example'
+//version '1.0'
+
+sourceCompatibility = 11.0
+
+libsDirName = '../libs/'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.shoe.minebot.MineBot'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
