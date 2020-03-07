@@ -5,7 +5,6 @@ import com.shoe.minebot.Utilities;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 public class Serverbound {
     public static void handshake(Client client) throws IOException {
@@ -17,20 +16,12 @@ public class Serverbound {
         outputStream.write(25565); //Sends port(25565)
         Utilities.writeVarInt(2,outputStream); //Mode to login
         Utilities.writeVarInt(2,outputStream); //Mode to login... again... dont ask why, but it just works and i dont know whats wrong with it but it has to be like this
-        //outputStream.write(2);     //Mode to login
         client.SendPacket(outputStream.toByteArray());
-        /*Utils.writeVarInt(704);
-        Utils.writeVarInt(0x00);
-        Utils.writeVarInt(704);
-        Networking.writeString("192.168.1.1");
-        Networking.writeByte((byte) 0x63);Networking.writeByte((byte) 0xDD);
-        Utils.writeVarInt(2);*/
     }
     public static void login_start(Client client) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Utilities.writeVarInt(0x00,outputStream);
         Utilities.writeString(client.username,outputStream);
-        //outputStream.writeBytes("testbot1".getBytes("UTF-8"));
         System.out.println(Utilities.bytesToHex(outputStream.toByteArray()));
         client.SendPacket(outputStream.toByteArray());
     }

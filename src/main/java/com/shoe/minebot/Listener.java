@@ -9,22 +9,14 @@ import java.util.zip.DataFormatException;
 
 public class Listener{
     public static void listen(Client client) throws IOException, DataFormatException, InterruptedException {
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         ByteArrayInputStream data;
         int mode=0; //0=handshake 1=play
         int id;     //ID of current packet
         System.out.println("Listener started");
         while (true) {
-        //for (int i=0;i<20;i++) {
             data = new ByteArrayInputStream(client.RecievePacket());
-            /*if (Utilities.readVarInt(data)==0x03) {
-                System.out.println("Compression is enabled with value:");
-                System.out.println(Utilities.readVarInt(data));
-                System.out.println("Expect errors");
-                continue;
-            }*/
             id   = Utilities.readVarInt(data);
-            //System.out.println(id);
             if (mode==0) {
                 switch(id) {
                     case 0x02: //Login_success
@@ -169,7 +161,6 @@ public class Listener{
                     System.out.println("");
                     System.out.println("");
                     System.out.printf("Unknown Packet ID: %x\n",id);
-                    //System.out.println(Utilities.bytesToHex(data.readAllBytes()));
                     return;
                     //break;
             }

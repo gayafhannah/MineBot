@@ -7,7 +7,6 @@ import com.shoe.minebot.Utilities;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Map;
 
 public class Clientbound {
     public static void login_success() {    //0x02
@@ -21,10 +20,6 @@ public class Clientbound {
 
 
     public static void chatMessage(Client client, ByteArrayInputStream data) throws IOException{ //0x0F
-        /*    TODO
-        FIX MESSAGE SENDER AND PARSER
-        REENABLE THIS IN LISTENER.JAVA
-         */
         int length = Utilities.readVarInt(data);
         byte[] bytes = new byte[length];
         data.read(bytes,0,length);
@@ -42,7 +37,6 @@ public class Clientbound {
                 break;
             case "chat.type.text": //Message sent by a player
                 System.out.println("Text Chat");
-                //sender  = string.substring(string.indexOf("{\"text\":\"")+9,string.indexOf("\"},{\"text"));
                 sender  = string.substring(string.indexOf("{\"text\":\"")+28,string.indexOf("\"}",string.indexOf("{\"text\":\""))-1);
                 message = string.substring(string.lastIndexOf("\"},\"")+4,string.lastIndexOf("\"]}"));
                 System.out.printf("<%s> %s\n",sender,message);
@@ -54,10 +48,6 @@ public class Clientbound {
         if (message.startsWith("&")) {
             Parser.parseCommand(client,message.substring(1));
         }
-        //String sender  = string.substring(string.indexOf("{\"text\":\"")+9,string.indexOf("\"},{\"text"));
-        //String message = string.substring(string.lastIndexOf("{\"text\":\"")+9,string.lastIndexOf("\"}]}"));
-        //System.out.printf("<%s> %s\n",sender,message);
-        //System.out.println(message);
     }
     public static void disconnectByServer() { //0x1B
         System.out.println("Disconnected By Server");
@@ -73,9 +63,6 @@ public class Clientbound {
         Serverbound.clientSettings(client);
     }
     public static void player_pos_dir(Client client, ByteArrayInputStream data) throws IOException {
-        /* TODO
-        Do Teleport ID thing
-         */
         byte[] X = new byte[8];
         byte[] Y = new byte[8];
         byte[] Z = new byte[8];

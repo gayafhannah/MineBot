@@ -13,7 +13,6 @@ import java.util.zip.Inflater;
 public class Client {
     public String username="testboi";
     public String ipAddr;
-    private Socket sock;
     public int compression=-1;
     public DataOutputStream dOut;
     public DataInputStream dIn;
@@ -34,7 +33,7 @@ public class Client {
         ipAddr=_ipAddr;
         username=_username;
         System.out.println("Connecting to server");
-        sock = new Socket(ipAddr,25565);
+        Socket sock = new Socket(ipAddr, 25565);
         dOut = new DataOutputStream(sock.getOutputStream());
         dIn = new DataInputStream(sock.getInputStream());
         System.out.println("Starting Handshake");
@@ -43,7 +42,6 @@ public class Client {
         actor.start();
     }
     public void SendPacket(byte[] data) throws IOException {
-        //Do the len of data, send varInt of length packed with data
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         int length=data.length;
         if ((compression!=-1)&&(length>=compression)) {  /// If there is ANY compression
@@ -63,15 +61,12 @@ public class Client {
             Utilities.writeVarInt(length,outputStream);
             if (compression!=-1){Utilities.writeVarInt(0,outputStream);}
             outputStream.write(data);
-            //dOut.write(outputStream.toByteArray());
         }
-        //System.out.println(Utilities.bytesToHex(outputStream.toByteArray()));
         dOut.write(outputStream.toByteArray());
 
     }
     public byte[] RecievePacket() throws IOException, DataFormatException {
         int length=getPacketLength();
-        //System.out.println(length);
 
         byte[] data = dIn.readNBytes(length);
 
@@ -89,7 +84,6 @@ public class Client {
                 data = tempData.readAllBytes();
             }
         }
-        //System.out.println(Utilities.bytesToHex(data));
         return data;
     }
     private int getPacketLength() throws IOException {

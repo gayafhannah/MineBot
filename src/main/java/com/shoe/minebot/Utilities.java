@@ -3,13 +3,10 @@ package com.shoe.minebot;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 
 public class Utilities {
     public static byte[] writeVarInt(int value, ByteArrayOutputStream outputStream/*byte[] b*/) throws IOException {
-        //ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        //outputStream.write(b);
         do {
             byte temp = (byte)(value & 0b01111111);
             // Note: >>> means that the sign bit is shifted with the rest of the number rather than being left alone
@@ -55,7 +52,7 @@ public class Utilities {
         return bytes;
     }
     public static double byteArrayToDouble(byte[] bytes) {
-        return ByteBuffer.wrap(bytes).getDouble(); ///////USER THSIFIEUHGIWUSH
+        return ByteBuffer.wrap(bytes).getDouble();
     }
 
 
