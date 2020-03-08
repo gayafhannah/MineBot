@@ -72,5 +72,8 @@ public class Serverbound {
         if (onGround==true) { outputStream.write(0x01); } else { outputStream.write(0x00); } //onGround Byte
         client.SendPacket(outputStream.toByteArray());
         System.out.println("Sent position packet");
+        client.Player_X=X;
+        client.Player_Y=Y;
+        client.Player_Z=Z;
     }
 }

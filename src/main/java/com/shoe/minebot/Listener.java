@@ -126,6 +126,8 @@ public class Listener{
                     break;
                 case 0x44: //Update entity metadata
                     break;
+                case 0x45: //Sent when entity is leashed to another
+                    break;
                 case 0x46: //Entity Velocity
                     break;
                 case 0x47: //Entity equipment

@@ -16,7 +16,12 @@ public class Parser {
                 System.out.println("Disconnected by user");
                 throw new RuntimeException("Disconnect by user");
             case "move": //move bot
-                client.queue.add("f");
+                if (cmd.length!=3) {
+                    Serverbound.chatMessage(client,"Invalid number of arguments, command is: move <direction> <distance>");
+                    break;
+                }
+                client.queue.add(cmd);
+                Serverbound.chatMessage(client, String.format("Command %s added to queue", command));
                 break;
             default: //Unknown command
                 Serverbound.chatMessage(client, String.format("Unknown command: %s", cmd[0]));
