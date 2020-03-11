@@ -54,10 +54,10 @@ public class Actor extends Thread{
                         e.printStackTrace();
                     }
                 }
-            } else if (cmd[0].equalsIgnoreCase("move")) {
+            } else if (cmd[0].equalsIgnoreCase("centre")) {
                 double X,Z;
-                X=(double) ((long) client.Player_X);
-                Z=(double) ((long) client.Player_Z);
+                X=(double) ((long) client.Player_X)-0.5;
+                Z=(double) ((long) client.Player_Z)+0.5;
                 try { Serverbound.playerPosition(client,X,client.Player_Y,Z,true); } catch (IOException e) { e.printStackTrace(); }
                 try {Serverbound.chatMessage(client, "Centred bot on block.");} catch (IOException ee) {ee.printStackTrace();}
             }
