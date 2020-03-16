@@ -13,8 +13,8 @@ public class Parser {
                 break;
             case "disconnect": //disconnect bot from server
                 Serverbound.chatMessage(client,"Disconnecting from server. bye");
-                System.out.println("Disconnected by user");
-                throw new RuntimeException("Disconnect by user");
+                System.out.println("Disconnected from server.");
+                System.exit(0);
             case "move": //move bot
                 if (cmd.length!=3) {
                     Serverbound.chatMessage(client,"Invalid number of arguments, command is: move <direction> <distance>");

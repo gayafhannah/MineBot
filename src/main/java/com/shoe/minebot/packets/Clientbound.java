@@ -49,6 +49,13 @@ public class Clientbound {
             Parser.parseCommand(client,message.substring(client.prefix.length()));
         }
     }
+    public static void windowConfirmation(Client client, ByteArrayInputStream data) throws IOException {
+        byte[] bytes = new byte[0];
+        data.read(bytes,0,4);
+        if (bytes[3]==0x00) {
+            Serverbound.windowConfirmation(client,bytes);
+        }
+    }
     public static void disconnectByServer() { //0x1B
         System.out.println("Disconnected By Server");
     }

@@ -63,6 +63,9 @@ public class Listener{
                     break;
                 case 0x12: //Declare Commands
                     break;
+                case 0x13: //Window Confirmation
+                    Clientbound.windowConfirmation(client,data);
+                    break;
                 case 0x14: //Close window UI
                     break;
                 case 0x15: //Window Items

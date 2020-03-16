@@ -57,6 +57,12 @@ public class Serverbound {
         Utilities.writeVarInt(0,outputStream);
         client.SendPacket(outputStream.toByteArray());
     }
+    public static void windowConfirmation(Client client, byte[] data) throws IOException {  //0x07
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Utilities.writeVarInt(0x07,outputStream);
+        outputStream.writeBytes(data);
+        client.SendPacket(outputStream.toByteArray());
+    }
     public static void keepalive(Client client, byte[] id) throws IOException {  //0x0F
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Utilities.writeVarInt(0x0F,outputStream);
