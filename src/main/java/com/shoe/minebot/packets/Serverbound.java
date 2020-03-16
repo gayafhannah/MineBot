@@ -5,6 +5,7 @@ import com.shoe.minebot.Utilities;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 public class Serverbound {
     public static void handshake(Client client) throws IOException {
@@ -22,7 +23,6 @@ public class Serverbound {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Utilities.writeVarInt(0x00,outputStream);
         Utilities.writeString(client.username,outputStream);
-        System.out.println(Utilities.bytesToHex(outputStream.toByteArray()));
         client.SendPacket(outputStream.toByteArray());
     }
 
@@ -65,7 +65,7 @@ public class Serverbound {
     }
     public static void playerPosition(Client client,double X,double Y,double Z,boolean onGround) throws IOException { //0x11
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Utilities.writeVarInt(0x011,outputStream);
+        Utilities.writeVarInt(0x11,outputStream);
         outputStream.writeBytes(Utilities.doubleToByteArray(X));
         outputStream.writeBytes(Utilities.doubleToByteArray(Y));
         outputStream.writeBytes(Utilities.doubleToByteArray(Z));
@@ -75,5 +75,24 @@ public class Serverbound {
         client.Player_X=X;
         client.Player_Y=Y;
         client.Player_Z=Z;
+    }
+    public static void blockPlacement(Client client, long X, long Y, long Z) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        int hand=0;
+        int face=1;
+        float Xx = (float) 0.5,Yy = (float) 0.05,Zz = (float) 0.5;
+        int insideBlock = 0x00;
+        byte[] location = ByteBuffer.allocate(8).putLong( ((X & 0x3FFFFFF) << 38) | ((Z & 0x3FFFFFF) << 12) | (Y & 0xFFF) ).array();
+        Utilities.writeVarInt(0x2c,outputStream);
+        Utilities.writeVarInt(0,outputStream);
+        outputStream.writeBytes(location);
+        Utilities.writeVarInt(face,outputStream);
+        outputStream.writeBytes(Utilities.floatToByteArray(Xx));
+        outputStream.writeBytes(Utilities.floatToByteArray(Yy));
+        outputStream.writeBytes(Utilities.floatToByteArray(Zz));
+        outputStream.write(insideBlock);
+        System.out.println("About to send open packet");
+        client.SendPacket(outputStream.toByteArray());
+        System.out.println(String.format("Sent %d bytes, location length is %d bytes", outputStream.toByteArray().length,location.length));
     }
 }

@@ -36,9 +36,25 @@ public class Parser {
                 Serverbound.chatMessage(client," - drop");
                 Serverbound.chatMessage(client," - move <compass dir> <distance>");
                 Serverbound.chatMessage(client," - getpos");
+                Serverbound.chatMessage(client," - place <X> <Y> <Z>");
                 break;
             case "getpos":
                 Serverbound.chatMessage(client, String.format("Position: %f %f %f", client.Player_X,client.Player_Y,client.Player_Z));
+                break;
+            case "place":
+                long X,Y,Z;
+                if (cmd.length!=4) {
+                    Serverbound.chatMessage(client,"Invalid number of arguments, command isL place <X> <Y> <Z>");
+                }
+                try {
+                    X = Integer.parseInt(cmd[1]);
+                    Y = Integer.parseInt(cmd[2]);
+                    Z = Integer.parseInt(cmd[3]);
+                } catch (NumberFormatException e) {
+                    Serverbound.chatMessage(client, String.format("Invalid distance: %s", cmd[2]));
+                    break;
+                }
+                Serverbound.blockPlacement(client,X,Y,Z);
                 break;
             default: //Unknown command
                 Serverbound.chatMessage(client, String.format("Unknown command: %s", cmd[0]));

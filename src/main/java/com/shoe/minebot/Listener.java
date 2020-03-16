@@ -64,6 +64,7 @@ public class Listener{
                 case 0x12: //Declare Commands
                     break;
                 case 0x15: //Window Items
+                    System.out.println("WINDOW ITEMS");
                     break;
                 case 0x17: //Item in slot is added/removed
                     break;
@@ -98,6 +99,9 @@ public class Listener{
                 case 0x2A: //Entity Position and Rotation
                     break;
                 case 0x2B: //Entity Rotation
+                    break;
+                case 0x2F: //Open window
+                    System.out.println("OPEN WINDOW");
                     break;
                 case 0x32: //Player Abilities
                     break;

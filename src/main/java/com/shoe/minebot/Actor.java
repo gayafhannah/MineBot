@@ -13,8 +13,8 @@ public class Actor extends Thread{
         while (true) {
             try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
             try {
-            //if (client.queue.isEmpty()) {continue;}
-            if (client.queue.isEmpty()) {Jobs.Drop(client);}
+            if (client.queue.isEmpty()) {continue;}
+            //if (client.queue.isEmpty()) {Jobs.Drop(client);continue;}
             String[] cmd = (String[])client.queue.remove();
             switch (cmd[0].toLowerCase()) {
                 case "move":
