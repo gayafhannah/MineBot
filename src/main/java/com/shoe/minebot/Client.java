@@ -24,7 +24,7 @@ public class Client {
     public float Player_Pitch;
     public float Player_Health=-1;
     //public static int Player_Hunger; unused sofar
-    public Queue queue = new LinkedList();
+    public Queue<String[]> queue = new LinkedList<>();
     public Actor actor = new Actor(this);
     public boolean MoveFailed;
 
