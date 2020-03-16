@@ -30,6 +30,7 @@ public class Parser {
                 break;
             case "help": //Help Menu
                 Serverbound.chatMessage(client,"Commands:\n - ping\n - disconnect\n - centre\n - drop\n - move <compass dir> <distance>");
+                break;
             default: //Unknown command
                 Serverbound.chatMessage(client, String.format("Unknown command: %s", cmd[0]));
                 return;
