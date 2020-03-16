@@ -11,7 +11,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 public class Client {
-    public String username="testboi";
+    public String username="TheBigThicc";
     public String prefix="&";
     public String ipAddr;
     public int compression=-1;
