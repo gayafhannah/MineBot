@@ -25,6 +25,7 @@ public class Client {
     //public static int Player_Hunger; unused sofar
     public Queue queue = new LinkedList();
     public Actor actor = new Actor(this);
+    public boolean MoveFailed;
 
     public void Connect(String _ipAddr) throws IOException {
         Connect(_ipAddr, username);

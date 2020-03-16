@@ -14,6 +14,27 @@ public class Actor extends Thread{
             try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
             if (client.queue.isEmpty()) {continue;}
             String[] cmd = (String[])client.queue.remove();
+            try {
+            switch (cmd[0].toLowerCase()) {
+                case "move":
+                    Jobs.Move(client,cmd);
+                    break;
+                case "centre":
+                    Jobs.Centre(client);
+                    break;
+                case "drop":
+                    Jobs.Drop(client);
+                    break;
+                default:
+                    System.out.println("Unknown Queue command: "+cmd.toString());
+                    try {Serverbound.chatMessage(client, "Unknown Queue Command: "+cmd.toString());} catch (IOException e) {e.printStackTrace();}
+                    break;
+            }
+            } catch (InterruptedException | IOException e) {
+                e.printStackTrace();
+            }
+
+            /*
             if (cmd[0].equalsIgnoreCase("move")) {
                 System.out.println("Started move");
                 try {Serverbound.chatMessage(client, "started move");} catch (IOException e) {e.printStackTrace();}
@@ -60,7 +81,7 @@ public class Actor extends Thread{
                 Z=(double) ((long) client.Player_Z)+0.5;
                 try { Serverbound.playerPosition(client,X,client.Player_Y,Z,true); } catch (IOException e) { e.printStackTrace(); }
                 try {Serverbound.chatMessage(client, "Centred bot on block.");} catch (IOException ee) {ee.printStackTrace();}
-            }
+            }*/
         }
     }
 }

@@ -25,7 +25,7 @@ public class Clientbound {
         data.read(bytes,0,length);
         String string = new String(bytes,"UTF-8");
         System.out.println(string);
-        String type = string.substring(string.indexOf("{\"translate\":\"")+14,string.indexOf("\",\""));
+        String type = string.substring(string.indexOf("\"translate\":\"")+13,string.indexOf("\",\"",string.indexOf("\"translate\":\"")+13));
         System.out.println(type);
         String sender;
         String message = "";
@@ -76,6 +76,7 @@ public class Clientbound {
         data.read(Yaw,0,4);
         data.read(Pitch,0,4);
         data.read(Flags,0,1);
+        client.MoveFailed = true; //SETS MOVEFAILED FLAG TO TRUE
         if (((Flags[0]>>0)&1)==1) {
             client.Player_X+=ByteBuffer.wrap(X).getDouble();
         } else {

@@ -25,6 +25,11 @@ public class Parser {
             case "centre": //centre to centre of current block (useful for when bot is between two blocks which would stop it from going through a 1x2)
                 client.queue.add(cmd);
                 break;
+            case "drop": //drop like gravity
+                client.queue.add(cmd);
+                break;
+            case "help": //Help Menu
+                Serverbound.chatMessage(client,"Commands:\n - ping\n - disconnect\n - centre\n - drop\n - move <compass dir> <distance>");
             default: //Unknown command
                 Serverbound.chatMessage(client, String.format("Unknown command: %s", cmd[0]));
                 return;
