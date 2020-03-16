@@ -39,7 +39,7 @@ public class Jobs {
             return;
         }
         for (int i=0;i<distance;i++) {
-            Thread.sleep(50);
+            Thread.sleep(20);
             if (client.MoveFailed) {
                 Serverbound.chatMessage(client, "Move Failed");
                 return;
@@ -67,16 +67,16 @@ public class Jobs {
         Y=(int) client.Player_Y;
         Serverbound.playerPosition(client,client.Player_X,Y,client.Player_Z,true);
         while (!client.MoveFailed) {
-            Thread.sleep(100);
+            Thread.sleep(20);
             Y=(int) client.Player_Y-1;
             Serverbound.playerPosition(client,client.Player_X,Y,client.Player_Z,true);
         }
         client.MoveFailed=false;
         while (!client.MoveFailed) {
-            Thread.sleep(100);
-            Y=client.Player_Y-0.5;
+            Thread.sleep(20);
+            Y=((int) client.Player_Y)-0.5;
             Serverbound.playerPosition(client,client.Player_X,Y,client.Player_Z,true);
         }
-        Serverbound.chatMessage(client, "Dropped down a bit i think! :D");
+        //Serverbound.chatMessage(client, "Dropped down a bit i think! :D");
     }
 }

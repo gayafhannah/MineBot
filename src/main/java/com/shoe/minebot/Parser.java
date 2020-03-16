@@ -29,7 +29,16 @@ public class Parser {
                 client.queue.add(cmd);
                 break;
             case "help": //Help Menu
-                Serverbound.chatMessage(client,"Commands:\n - ping\n - disconnect\n - centre\n - drop\n - move <compass dir> <distance>");
+                Serverbound.chatMessage(client,"Commands:");
+                Serverbound.chatMessage(client," - ping");
+                Serverbound.chatMessage(client," - disconnect");
+                Serverbound.chatMessage(client," - centre");
+                Serverbound.chatMessage(client," - drop");
+                Serverbound.chatMessage(client," - move <compass dir> <distance>");
+                Serverbound.chatMessage(client," - getpos");
+                break;
+            case "getpos":
+                Serverbound.chatMessage(client, String.format("Position: %f %f %f", client.Player_X,client.Player_Y,client.Player_Z));
                 break;
             default: //Unknown command
                 Serverbound.chatMessage(client, String.format("Unknown command: %s", cmd[0]));
