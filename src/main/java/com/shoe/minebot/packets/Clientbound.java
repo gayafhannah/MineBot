@@ -45,8 +45,8 @@ public class Clientbound {
                 System.out.printf("Unknown message type: %s\n",type);
                 break;
         }
-        if (message.startsWith("&")) {
-            Parser.parseCommand(client,message.substring(1));
+        if (message.startsWith(client.prefix)) {
+            Parser.parseCommand(client,message.substring(client.prefix.length()));
         }
     }
     public static void disconnectByServer() { //0x1B

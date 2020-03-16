@@ -12,6 +12,7 @@ import java.util.zip.Inflater;
 
 public class Client {
     public String username="testboi";
+    public String prefix="&";
     public String ipAddr;
     public int compression=-1;
     public DataOutputStream dOut;
